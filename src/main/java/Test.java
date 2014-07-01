@@ -1,13 +1,8 @@
-import java.util.Arrays;
-
-import ode.ExpliziterEuler;
-import ode.Funktion;
-import ode.Heun;
-import ode.ImpliziterEuler;
-import ode.ODE;
-import ode.RungeKutta4;
-import planeten.PlanetenGUI;
 import freierfall.FastTransportGui;
+import ode.*;
+import planeten.PlanetenGUI;
+
+import java.util.Arrays;
 
 public class Test {
 
@@ -55,8 +50,8 @@ public class Test {
 			@Override
 			public double[] auswerten(double t, double[] y) {
 				double[] v = new double[1];
-				v[0] = 0;
-				return v;
+                v[0] += 20;
+                return v;
 			}
 		};
 

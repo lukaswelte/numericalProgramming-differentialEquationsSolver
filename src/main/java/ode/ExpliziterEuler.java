@@ -1,7 +1,5 @@
 package ode;
 
-import java.util.Arrays;
-
 /**
  * Das Einschrittverfahren "Expliziter Euler"
  * 
@@ -11,8 +9,13 @@ import java.util.Arrays;
 public class ExpliziterEuler implements Einschrittverfahren {
 
 	public double[] nextStep(double[] y_k, double t, double delta_t, ODE ode) {
-		//TODO: diese Methode ist zu implementieren
-		return Arrays.copyOf(y_k, y_k.length);
-	}
+        double[] newYK = ode.auswerten(t, y_k);
 
+        for (int i = 0; i < newYK.length; i++) {
+            newYK[i] *= delta_t; //delta t * YK
+            newYK[i] += y_k[i]; // y + deltat * yk
+        }
+
+        return newYK;
+    }
 }
