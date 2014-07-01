@@ -50,7 +50,7 @@ public class Test {
 			@Override
 			public double[] auswerten(double t, double[] y) {
 				double[] v = new double[1];
-                v[0] += 20;
+                v[0] += t * y[0];
                 return v;
 			}
 		};
@@ -113,8 +113,8 @@ public class Test {
 			@Override
 			public double[] auswerten(double[] x) {
 				double[] y = new double[1];
-				y[0] = x[0];
-				return y;
+                y[0] = x[0] * x[0] - 2 * x[0] - 3;
+                return y;
 			}
 		};
 
@@ -137,8 +137,8 @@ public class Test {
 			@Override
 			public double[] auswerten(double t, double[] y) {
 				double[] v = new double[1];
-				v[0] = 0;
-				return v;
+                v[0] = -y[0] * y[0];
+                return v;
 			}
 		};
 

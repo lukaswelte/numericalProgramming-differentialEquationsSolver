@@ -1,7 +1,5 @@
 package ode;
 
-import java.util.Arrays;
-
 /**
  * Der klassische Runge-Kutta der Ordnung 4
  * 
@@ -16,9 +14,22 @@ public class RungeKutta4 implements Einschrittverfahren {
 	 * Bei der Umsetzung koennen die Methoden addVectors und multScalar benutzt werden.
 	 */
 	public double[] nextStep(double[] y_k, double t, double delta_t, ODE ode) {
-		//TODO: diese Methode ist zu implementieren
-		return Arrays.copyOf(y_k, y_k.length);
-	}
+        double[] k1 = multScalar(ode.auswerten(t, y_k), delta_t);
+
+        double[] k2 = multScalar(ode.auswerten(t + 0.5 * delta_t, addVectors(y_k, multScalar(k1, 0.5))), delta_t);
+
+        double[] k3 = multScalar(ode.auswerten(t + 0.5 * delta_t, addVectors(y_k, multScalar(k2, 0.5))), delta_t);
+
+        double[] k4 = multScalar(ode.auswerten(t + delta_t, addVectors(y_k, k3)), delta_t);
+
+        double[] result = addVectors(k1, k2);
+        result = addVectors(result, k3);
+        result = addVectors(result, k4);
+        result = multScalar(result, 1.0 / 6.0);
+        result = addVectors(result, y_k);
+
+        return result;
+    }
 
 	/**
 	 * addiert die zwei Vektoren a und b
